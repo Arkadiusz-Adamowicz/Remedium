@@ -200,11 +200,6 @@ function FlightSearch() {
   const [returnDate, setReturnDate] = useState("2025-05-19");
   const [passengers, setPassengers] = useState("1 pasażer");
 
-  const swapDirections = () => {
-    setFrom(to);
-    setTo(from);
-  };
-
   return (
     <div className="mt-[34px] rounded-[11px] border border-white/15 bg-[#050b12]/92 p-4 shadow-2xl shadow-black/70 backdrop-blur-xl sm:p-[18px]">
       <div className="mb-[16px] flex flex-wrap gap-x-[28px] gap-y-3 text-[13px] font-semibold text-white/70">
@@ -222,11 +217,6 @@ function FlightSearch() {
           <input type="radio" name="trip" className="h-4 w-4 accent-blue-600" />
           W jedną stronę
         </label>
-
-        {/* <label className="flex cursor-pointer items-center gap-2">
-          <input type="radio" name="trip" className="h-4 w-4 accent-blue-600" />
-          Multi-city
-        </label> */}
       </div>
 
       <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-[1.23fr_1.23fr_1fr_1fr_.8fr_.86fr] xl:gap-[6px]">
@@ -234,15 +224,6 @@ function FlightSearch() {
 
         <div className="relative">
           <SelectBox label="Do" value={to} onChange={setTo} />
-
-          <button
-            type="button"
-            onClick={swapDirections}
-            aria-label="Zamień kierunki lotu"
-            className="absolute right-4 top-4 z-20 flex h-[36px] w-[36px] items-center justify-center rounded-full bg-[#202936] shadow-xl transition hover:scale-105 hover:bg-blue-600 xl:-left-[21px] xl:top-1/2 xl:-translate-y-1/2"
-          >
-            <ArrowLeftRight className="h-5 w-5 text-white" />
-          </button>
         </div>
 
         <DateBox
