@@ -16,7 +16,8 @@ export default function Home() {
   return (
     <main className="relative min-h-[100svh] overflow-hidden bg-[#020812] font-['Satoshi'] text-white">
       <img
-  src="/src/assets/home-hero.png"
+  // src="/src/assets/home-hero.png"
+  src='/home-hero.png'
   alt="Remedium travel hero"
   className="
     absolute inset-0
