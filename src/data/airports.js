@@ -1,0 +1,16 @@
+export const airports = [
+  "Warszawa (WAW)",
+  "Kraków (KRK)",
+  "Gdańsk (GDN)",
+  "Wrocław (WRO)",
+  "Katowice (KTW)",
+  "Poznań (POZ)",
+  "Paryż (CDG)",
+  "Rzym (FCO)",
+  "Barcelona (BCN)",
+  "Londyn (LHR)",
+  "Nowy Jork (JFK)",
+  "Tokio (HND)",
+  "Dubaj (DXB)",
+  "Bali (DPS)",
+];

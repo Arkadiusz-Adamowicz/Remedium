@@ -3,25 +3,25 @@ export const testimonials = [
     name: "Anna Kowalska",
     city: "Wrocław",
     text: "Świetna obsługa i bardzo szybka rezerwacja. Wszystko było jasne od początku do końca.",
-    avatar: "/src/assets/avatars/avatar-1.png",
+    avatar: "/avatar-1.png",
   },
   {
     name: "Michał Nowak",
     city: "Warszawa",
     text: "Znaleźliśmy lot do Paryża w super cenie. Na pewno wrócę przy kolejnej podróży.",
-    avatar: "/src/assets/avatars/avatar-2.png",
+    avatar: "/avatar-2.png",
   },
   {
     name: "Katarzyna Zielińska",
     city: "Kraków",
     text: "Profesjonalne podejście, szybki kontakt i wygodny system rezerwacji.",
-    avatar: "/src/assets/avatars/avatar-3.png",
+    avatar: "/avatar-3.png",
   },
   {
     name: "Tomasz Wiśniewski",
     city: "Poznań",
     text: "Bardzo estetyczna strona, łatwo znalazłem najlepszy kierunek i termin.",
-    avatar: "/src/assets/avatars/avatar-4.png",
+    avatar: "/avatar-4.png",
   },
 ];
 
