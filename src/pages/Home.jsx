@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import Popular from "./Popular.jsx";
 import TestimonialsCarousel from "./TestimonialsCarousel";
+import airports from "../data/airports.js";
 import {
   Plane,
   ArrowLeftRight,
@@ -10,26 +11,12 @@ import {
   Headphones,
   Route,
   Menu,
+  X,
 } from "lucide-react";
 
-const airports = [
-  "Warszawa (WAW)",
-  "Kraków (KRK)",
-  "Gdańsk (GDN)",
-  "Wrocław (WRO)",
-  "Katowice (KTW)",
-  "Poznań (POZ)",
-  "Paryż (CDG)",
-  "Rzym (FCO)",
-  "Barcelona (BCN)",
-  "Londyn (LHR)",
-  "Nowy Jork (JFK)",
-  "Tokio (HND)",
-  "Dubaj (DXB)",
-  "Bali (DPS)",
-];
-
 export default function Home() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#020812] font-['Satoshi'] text-white">
       <img
@@ -52,7 +39,7 @@ export default function Home() {
       <div className="absolute inset-0 h-[850px] bg-gradient-to-t from-[#020812] via-[#020812]/25 to-transparent" />
 
       <div className="relative z-10 mx-auto max-w-[1370px] px-4 sm:px-6 lg:px-10 xl:px-[60px]">
-        <header className="flex h-[82px] items-center justify-between">
+        <header className="relative flex h-[82px] items-center justify-between">
           <Link to="/" className="flex items-center gap-3">
             <Plane className="h-8 w-8 rotate-[10deg] fill-blue-500 stroke-blue-500 stroke-[1.8]" />
             <span className="text-[20px] font-black tracking-[-0.03em]">
@@ -83,17 +70,70 @@ export default function Home() {
             </Link>
           </div>
 
-          <button className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/15 bg-white/10 backdrop-blur md:hidden">
-            <Menu className="h-6 w-6" />
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen((prev) => !prev)}
+            aria-label={mobileMenuOpen ? "Zamknij menu" : "Otwórz menu"}
+            aria-expanded={mobileMenuOpen}
+            className="relative z-50 flex h-11 w-11 items-center justify-center rounded-xl border border-white/15 bg-white/10 backdrop-blur md:hidden"
+          >
+            {mobileMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
           </button>
+
+          {mobileMenuOpen && (
+            <div className="absolute right-0 top-[72px] z-40 w-full overflow-hidden rounded-2xl border border-white/10 bg-[#07101a]/95 p-4 shadow-2xl shadow-black/60 backdrop-blur-xl md:hidden">
+              <nav className="flex flex-col gap-2 text-[15px] font-bold text-white">
+                <MobileMenuLink to="/" setMobileMenuOpen={setMobileMenuOpen}>
+                  Strona główna
+                </MobileMenuLink>
+                <MobileMenuLink
+                  to="/flights"
+                  setMobileMenuOpen={setMobileMenuOpen}
+                >
+                  Loty
+                </MobileMenuLink>
+                <MobileMenuLink
+                  to="/reservations"
+                  setMobileMenuOpen={setMobileMenuOpen}
+                >
+                  Moje rezerwacje
+                </MobileMenuLink>
+                <MobileMenuLink
+                  to="/contact"
+                  setMobileMenuOpen={setMobileMenuOpen}
+                >
+                  Kontakt
+                </MobileMenuLink>
+              </nav>
+
+              <div className="mt-4 grid gap-3 border-t border-white/10 pt-4">
+                <Link
+                  to="/login"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex h-12 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-[14px] font-black hover:bg-white/15"
+                >
+                  Zaloguj się
+                </Link>
+
+                <Link
+                  to="/register"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex h-12 items-center justify-center rounded-xl bg-blue-600 text-[14px] font-black shadow-lg shadow-blue-700/40 hover:bg-blue-500"
+                >
+                  Zarejestruj się
+                </Link>
+              </div>
+            </div>
+          )}
         </header>
 
         <section className="relative z-10 pt-8 sm:pt-12 lg:pt-[58px]">
           <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-[13px] font-semibold text-white/90 backdrop-blur">
-            <Plane
-              className="h-4 w-4 rotate-[1
-            0deg] fill-cyan-400 stroke-cyan-400 stroke-[1.6]"
-            />
+            <Plane className="h-4 w-4 rotate-[10deg] fill-cyan-400 stroke-cyan-400 stroke-[1.6]" />
             Odkrywaj świat z Remedium
           </div>
 
@@ -141,12 +181,29 @@ export default function Home() {
   );
 }
 
+function MobileMenuLink({ to, children, setMobileMenuOpen }) {
+  return (
+    <Link
+      to={to}
+      onClick={() => setMobileMenuOpen(false)}
+      className="rounded-xl px-4 py-3 hover:bg-white/10"
+    >
+      {children}
+    </Link>
+  );
+}
+
 function FlightSearch() {
   const [from, setFrom] = useState("Warszawa (WAW)");
   const [to, setTo] = useState("Paryż (CDG)");
   const [departureDate, setDepartureDate] = useState("2025-05-12");
   const [returnDate, setReturnDate] = useState("2025-05-19");
   const [passengers, setPassengers] = useState("1 pasażer");
+
+  const swapDirections = () => {
+    setFrom(to);
+    setTo(from);
+  };
 
   return (
     <div className="mt-[34px] rounded-[11px] border border-white/15 bg-[#050b12]/92 p-4 shadow-2xl shadow-black/70 backdrop-blur-xl sm:p-[18px]">
@@ -165,6 +222,11 @@ function FlightSearch() {
           <input type="radio" name="trip" className="h-4 w-4 accent-blue-600" />
           W jedną stronę
         </label>
+
+        {/* <label className="flex cursor-pointer items-center gap-2">
+          <input type="radio" name="trip" className="h-4 w-4 accent-blue-600" />
+          Multi-city
+        </label> */}
       </div>
 
       <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-[1.23fr_1.23fr_1fr_1fr_.8fr_.86fr] xl:gap-[6px]">
@@ -172,6 +234,15 @@ function FlightSearch() {
 
         <div className="relative">
           <SelectBox label="Do" value={to} onChange={setTo} />
+
+          <button
+            type="button"
+            onClick={swapDirections}
+            aria-label="Zamień kierunki lotu"
+            className="absolute right-4 top-4 z-20 flex h-[36px] w-[36px] items-center justify-center rounded-full bg-[#202936] shadow-xl transition hover:scale-105 hover:bg-blue-600 xl:-left-[21px] xl:top-1/2 xl:-translate-y-1/2"
+          >
+            <ArrowLeftRight className="h-5 w-5 text-white" />
+          </button>
         </div>
 
         <DateBox
@@ -179,7 +250,6 @@ function FlightSearch() {
           value={departureDate}
           onChange={setDepartureDate}
         />
-
         <DateBox label="Powrót" value={returnDate} onChange={setReturnDate} />
 
         <SelectBox
@@ -215,15 +285,7 @@ function SelectBox({ label, value, onChange, options = airports }) {
         <select
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="
-            w-full cursor-pointer appearance-none rounded-md
-            bg-[#07101a]
-            pr-8
-            text-[15px] font-black text-white
-            outline-none
-            transition
-            [color-scheme:dark]
-          "
+          className="w-full cursor-pointer appearance-none rounded-md bg-[#07101a] pr-8 text-[15px] font-black text-white outline-none transition [color-scheme:dark]"
         >
           {options.map((item) => (
             <option key={item} value={item} className="bg-[#07101a] text-white">
@@ -251,18 +313,7 @@ function DateBox({ label, value, onChange }) {
         type="date"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="
-          w-full cursor-pointer rounded-md
-          bg-[#07101a]
-          text-[15px] font-black text-white
-          outline-none
-          accent-blue-600
-          [color-scheme:dark]
-          [&::-webkit-calendar-picker-indicator]:cursor-pointer
-          [&::-webkit-calendar-picker-indicator]:rounded-md
-          [&::-webkit-calendar-picker-indicator]:bg-blue-500
-          [&::-webkit-calendar-picker-indicator]:p-[3px]
-        "
+        className="w-full cursor-pointer rounded-md bg-[#07101a] text-[15px] font-black text-white outline-none accent-blue-600 [color-scheme:dark] [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:rounded-md [&::-webkit-calendar-picker-indicator]:bg-blue-500 [&::-webkit-calendar-picker-indicator]:p-[3px]"
       />
     </div>
   );

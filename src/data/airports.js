@@ -14,3 +14,4 @@ export const airports = [
   "Dubaj (DXB)",
   "Bali (DPS)",
 ];
+export default airports;
