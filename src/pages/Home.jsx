@@ -35,7 +35,6 @@ export default function Home() {
 
       <div className="absolute inset-0 h-[850px] bg-gradient-to-r from-[#020812]/95 via-[#020812]/58 to-[#020812]/8" />
       <div className="absolute inset-0 h-[850px] bg-gradient-to-t from-[#020812] via-[#020812]/25 to-transparent" />
-
       <div className="relative z-10 mx-auto max-w-[1370px] px-4 sm:px-6 lg:px-10 xl:px-[60px]">
         <Navbar />
 
