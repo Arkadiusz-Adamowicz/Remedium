@@ -1,112 +1,22 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import airports from "../../data/airports.js";
-
-const tripTypes = [
-  "Apartamenty",
-  "City Break",
-  "Kolonie i obozy młodzieżowe",
-  "Pielgrzymki",
-  "Rejsy",
-  "Rejsy pilot PL",
-  "Wczasy",
-  "Wczasy w dwóch hotelach",
-  "Wycieczki objazdowe",
-  "Zwiedzanie i Wypoczynek",
-];
-
-const operators = [
-  "Almatur",
-  "Atlas Tours Rejsy",
-  "Atur",
-  "Best Reisen Group",
-  "Coral Travel",
-  "Ecco Holiday / Ecco Travel",
-  "Euro Pol Tour",
-  "Exim Tours",
-  "Funclub",
-  "Index Polska",
-  "Itaka",
-];
-
-const attributes = [
-  "Animacje dla dorosłych",
-  "Basen kryty",
-  "Basen odkryty",
-  "Bez paszportu",
-  "Blisko centrum",
-  "Blisko plaży",
-  "Dla rodzin z dziećmi",
-  "Dla seniorów",
-  "Duże miasta",
-  "Egzotyka",
-  "Fitness/siłownia",
-];
-
-const standards = [
-  "Standard od ★",
-  "Standard od ★★",
-  "Standard od ★★★",
-  "Standard od ★★★★",
-  "Standard od ★★★★★",
-];
+import tripTypes from "../../data/tripTypes.js";
+import operators from "../../data/operators.js";
+import attributes from "../../data/attributes.js";
+import meals from "../../data/meals.js";
+import nights from "../../data/nights.js";
+import standards from "../../data/standards.js";
+import destinations from "../../data/destinations.js";
 
 const transports = ["Samolot", "Dojazd własny", "Autokar"];
-
-const destinations = [
-  "Albania",
-  "Algieria",
-  "Andora",
-  "Angola",
-  "Antarktyda",
-  "Arabia Saudyjska",
-  "Argentyna",
-  "Arktyka",
-  "Armenia",
-  "Australia",
-  "Austria",
-];
-
-const meals = [
-  "Bez wyżywienia",
-  "Obiad",
-  "Pełne wyżywienie",
-  "Śniadanie",
-  "Śniadanie i obiadokolacje",
-  "Według programu",
-  "Wszystko w cenie",
-];
-
-const nights = [
-  "1",
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7",
-  "8",
-  "9",
-  "10",
-  "11",
-  "12",
-  "13",
-  "14",
-  "15",
-  "16",
-  "17",
-  "18",
-  "19",
-  "20",
-  "21+",
-];
 
 export default function FlightSearch() {
   const [from, setFrom] = useState("Warszawa (WAW)");
   const [to, setTo] = useState("Paryż (CDG)");
   const [departureDate, setDepartureDate] = useState("2025-05-12");
   const [returnDate, setReturnDate] = useState("2025-05-19");
-  const [passengers, setPassengers] = useState("1 pasażer");
+  const [passengers, setPassengers] = useState("2 Dorosłych");
 
   const [tripType, setTripType] = useState("");
   const [operator, setOperator] = useState("");
@@ -117,116 +27,123 @@ export default function FlightSearch() {
   const [meal, setMeal] = useState("");
   const [night, setNight] = useState("");
 
+  const [showMoreFilters, setShowMoreFilters] = useState(false);
+
   return (
     <div className="mt-[34px] rounded-[14px] border border-white/10 bg-[#050b12]/92 p-4 shadow-2xl shadow-black/70 backdrop-blur-xl sm:p-[22px]">
-      <div className="mb-[16px] flex flex-wrap gap-x-[28px] gap-y-3 text-[13px] font-semibold text-white/70">
-        <label className="flex cursor-pointer items-center gap-2">
-          <input
-            type="radio"
-            name="trip"
-            defaultChecked
-            className="h-4 w-4 accent-blue-600"
+      <div className="grid gap-3 lg:grid-cols-3">
+        {/* MOBILE: 1 */}
+        <div className="order-1 lg:order-1">
+          <SelectBox
+            label="Typ transportu"
+            value={transport}
+            onChange={setTransport}
+            options={transports}
+            placeholder="Typ transportu"
           />
-          W obie strony
-        </label>
+        </div>
 
-        <label className="flex cursor-pointer items-center gap-2">
-          <input type="radio" name="trip" className="h-4 w-4 accent-blue-600" />
-          W jedną stronę
-        </label>
-      </div>
+        {/* MOBILE: 2 */}
+        <div className="order-2 lg:order-2">
+          <SelectBox
+            label="Cel podróży"
+            value={destination}
+            onChange={setDestination}
+            options={destinations}
+            placeholder="Cel podróży"
+          />
+        </div>
 
-      {/* GŁÓWNE POLA */}
-      <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5 xl:gap-[8px]">
-        <SelectBox label="Z" value={from} onChange={setFrom} />
+        {/* MOBILE: 3 */}
+        <div className="order-3 lg:order-3">
+          <SelectBox
+            label="Podróż z"
+            value={from}
+            onChange={setFrom}
+            options={airports}
+            placeholder="Podróż z"
+          />
+        </div>
 
-        <SelectBox label="Do" value={to} onChange={setTo} />
+        {/* MOBILE: 4 */}
+        <div className="order-4 grid grid-cols-2 gap-3 lg:order-4">
+          <DateBox
+            label="Data wyjazdu"
+            value={departureDate}
+            onChange={setDepartureDate}
+          />
 
-        <DateBox
-          label="Wylot"
-          value={departureDate}
-          onChange={setDepartureDate}
-        />
+          <DateBox
+            label="Data powrotu"
+            value={returnDate}
+            onChange={setReturnDate}
+          />
+        </div>
 
-        <DateBox label="Powrót" value={returnDate} onChange={setReturnDate} />
+        {/* MOBILE: 5 */}
+        <div className="order-5 lg:order-5">
+          <SelectBox
+            label="Pasażerowie"
+            value={passengers}
+            onChange={setPassengers}
+            options={["1 Dorosły", "2 Dorosłych", "3 Dorosłych", "4 Dorosłych"]}
+          />
+        </div>
 
-        <SelectBox
-          label="Pasażerowie"
-          value={passengers}
-          onChange={setPassengers}
-          options={["1 pasażer", "2 pasażerów", "3 pasażerów", "4 pasażerów"]}
-        />
-      </div>
+        {/* MOBILE: 6 */}
+        <div className="order-6 lg:order-6">
+          <SelectBox
+            label="Wyżywienie"
+            value={meal}
+            onChange={setMeal}
+            options={meals}
+            placeholder="Wyżywienie"
+          />
+        </div>
 
-      {/* FILTRY */}
-      <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-        <SelectBox
-          label="Typ podróży"
-          value={tripType}
-          onChange={setTripType}
-          options={tripTypes}
-          placeholder="Wybierz typ podróży"
-        />
+        {/* MOBILE: 7 */}
+        <div className="order-7 lg:order-7">
+          <SelectBox
+            label="Liczba nocy"
+            value={night}
+            onChange={setNight}
+            options={nights}
+            placeholder="Liczba nocy"
+          />
+        </div>
 
-        <SelectBox
-          label="Operator"
-          value={operator}
-          onChange={setOperator}
-          options={operators}
-          placeholder="Wybierz operatora"
-        />
+        {/* MOBILE: 8 */}
+        <button
+          type="button"
+          onClick={() => setShowMoreFilters((prev) => !prev)}
+          className="
+            order-8
+            flex h-[64px] items-center gap-3
+            rounded-[12px]
+            border border-cyan-300/10
+            bg-cyan-300/10
+            px-5
+            text-[16px]
+            font-black
+            tracking-wide
+            text-cyan-100
+            transition duration-300
+            hover:bg-cyan-300/20
+            lg:order-8
+          "
+        >
+          <span
+            className={`transition duration-300 ${
+              showMoreFilters ? "rotate-180" : ""
+            }`}
+          >
+            ▼
+          </span>
 
-        <SelectBox
-          label="Atrybuty"
-          value={attribute}
-          onChange={setAttribute}
-          options={attributes}
-          placeholder="Wybierz atrybut"
-        />
+          {showMoreFilters ? "Pokaż mniej" : "Więcej opcji"}
+        </button>
 
-        <SelectBox
-          label="Standard"
-          value={standard}
-          onChange={setStandard}
-          options={standards}
-          placeholder="Wybierz standard"
-        />
-
-        <SelectBox
-          label="Typ transportu"
-          value={transport}
-          onChange={setTransport}
-          options={transports}
-          placeholder="Wybierz transport"
-        />
-
-        <SelectBox
-          label="Cel podróży"
-          value={destination}
-          onChange={setDestination}
-          options={destinations}
-          placeholder="Wybierz kierunek"
-        />
-
-        <SelectBox
-          label="Wyżywienie"
-          value={meal}
-          onChange={setMeal}
-          options={meals}
-          placeholder="Wybierz wyżywienie"
-        />
-
-        <SelectBox
-          label="Liczba nocy"
-          value={night}
-          onChange={setNight}
-          options={nights}
-          placeholder="Wybierz liczbę nocy"
-        />
-      </div>
-
-      {/* PRZYCISK NA DOLE */}
-      <div className="mt-5">
+        {/* MOBILE: 9 */}
         <Link
           to={`/flights?from=${encodeURIComponent(
             from,
@@ -249,11 +166,62 @@ export default function FlightSearch() {
           )}&meal=${encodeURIComponent(
             meal,
           )}&nights=${encodeURIComponent(night)}`}
-          className="flex h-[64px] w-full items-center justify-center rounded-[12px] bg-gradient-to-r from-blue-600 to-cyan-500 text-[16px] font-black tracking-wide text-white shadow-2xl shadow-blue-700/40 transition duration-300 hover:scale-[1.01] hover:from-blue-500 hover:to-cyan-400"
+          className="
+            order-9
+            flex h-[64px] items-center justify-center gap-3
+            rounded-[12px]
+            bg-gradient-to-r from-blue-600 to-cyan-500
+            text-[16px]
+            font-black
+            tracking-wide
+            text-white
+            shadow-2xl shadow-blue-700/40
+            transition duration-300
+            hover:scale-[1.01]
+            hover:from-blue-500
+            hover:to-cyan-400
+            lg:order-9
+          "
         >
-          Szukaj lotów
+          Szukaj
         </Link>
       </div>
+
+      {showMoreFilters && (
+        <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+          <SelectBox
+            label="Typ podróży"
+            value={tripType}
+            onChange={setTripType}
+            options={tripTypes}
+            placeholder="Wybierz typ podróży"
+          />
+
+          <SelectBox
+            label="Operator"
+            value={operator}
+            onChange={setOperator}
+            options={operators}
+            placeholder="Wybierz operatora"
+          />
+
+          <SelectBox
+            label="Atrybuty"
+            value={attribute}
+            onChange={setAttribute}
+            options={attributes}
+            placeholder="Wybierz atrybut"
+          />
+
+          <SelectBox
+            label="Standard"
+            value={standard}
+            onChange={setStandard}
+            options={standards}
+            placeholder="Wybierz standard"
+          />
+        </div>
+      )}
     </div>
   );
 }
@@ -275,7 +243,16 @@ function SelectBox({
         <select
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="w-full cursor-pointer appearance-none rounded-md bg-[#07101a] pr-8 text-[15px] font-black text-white outline-none [color-scheme:dark]"
+          className="
+            w-full cursor-pointer appearance-none
+            rounded-md bg-[#07101a]
+            pr-8
+            text-[15px]
+            font-black
+            text-white
+            outline-none
+            [color-scheme:dark]
+          "
         >
           {placeholder && (
             <option value="" className="bg-[#07101a] text-white/50">
@@ -309,7 +286,20 @@ function DateBox({ label, value, onChange }) {
         type="date"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full cursor-pointer rounded-md bg-[#07101a] text-[15px] font-black text-white outline-none accent-blue-600 [color-scheme:dark] [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:rounded-md [&::-webkit-calendar-picker-indicator]:bg-blue-500 [&::-webkit-calendar-picker-indicator]:p-[3px]"
+        className="
+          w-full cursor-pointer
+          rounded-md bg-[#07101a]
+          text-[15px]
+          font-black
+          text-white
+          outline-none
+          accent-blue-600
+          [color-scheme:dark]
+          [&::-webkit-calendar-picker-indicator]:cursor-pointer
+          [&::-webkit-calendar-picker-indicator]:rounded-md
+          [&::-webkit-calendar-picker-indicator]:bg-blue-500
+          [&::-webkit-calendar-picker-indicator]:p-[3px]
+        "
       />
     </div>
   );

@@ -33,18 +33,10 @@ export default function Navbar() {
       <div className="hidden items-center gap-3 md:flex">
         <Link
           to="/login"
-          // className="flex h-12 items-center justify-center rounded-xl bg-blue-600 text-[14px] font-black shadow-lg shadow-blue-700/40 hover:bg-blue-500"
           className="flex h-12 items-center justify-center rounded-xl bg-blue-600 px-5 text-[14px] font-black shadow-lg shadow-blue-700/40 hover:bg-blue-500"
         >
           Logowanie
         </Link>
-
-        {/* <Link
-          to="/register"
-          className="rounded-[8px] bg-blue-600 px-[24px] py-[14px] text-[13px] font-bold shadow-lg shadow-blue-700/40 hover:bg-blue-500"
-        >
-          Zarejestruj się
-        </Link> */}
       </div>
 
       <button
@@ -86,14 +78,6 @@ export default function Navbar() {
             >
               Logowanie
             </Link>
-
-            {/* <Link
-              to="/register"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex h-12 items-center justify-center rounded-xl bg-blue-600 text-[14px] font-black shadow-lg shadow-blue-700/40 hover:bg-blue-500"
-            >
-              Zarejestruj się
-            </Link> */}
           </div>
         </div>
       )}

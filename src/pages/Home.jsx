@@ -80,9 +80,7 @@ export default function Home() {
             />
           </div>
         </section>
-
         <TestimonialsCarousel />
-
         <Popular />
       </div>
     </main>
@@ -95,7 +93,6 @@ function Feature({ icon, title, text }) {
       <div className="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-full bg-white/10 text-white">
         <div className="h-5 w-5">{icon}</div>
       </div>
-
       <div>
         <h3 className="text-[15px] font-black">{title}</h3>
         <p className="mt-[3px] text-[13px] font-medium text-white/58">{text}</p>
