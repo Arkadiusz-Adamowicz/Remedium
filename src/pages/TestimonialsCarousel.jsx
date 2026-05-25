@@ -29,7 +29,7 @@ export default function TestimonialsCarousel() {
   const items = [...testimonials, ...testimonials];
 
   return (
-    <section className="relative z-10 mx-auto mt-14 max-w-[1780px] overflow-hidden px-4 ">
+    <section className="relative z-10 mx-auto mt-14 max-w-[1780px] overflow-hidden">
       <div className="mb-7">
         <h2 className="text-[26px] font-black tracking-tight sm:text-[32px]">
           Opinie klientów
