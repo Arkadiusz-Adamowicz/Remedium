@@ -6,15 +6,15 @@ export const testimonials = [
     avatar: "/avatar-1.png",
   },
   {
-    name: "Michał Nowak",
-    city: "Warszawa",
-    text: "Znaleźliśmy lot do Paryża w super cenie. Na pewno wrócę przy kolejnej podróży.",
-    avatar: "/avatar-2.png",
-  },
-  {
     name: "Katarzyna Zielińska",
     city: "Kraków",
     text: "Profesjonalne podejście, szybki kontakt i wygodny system rezerwacji.",
+    avatar: "/avatar-2.png",
+  },
+  {
+    name: "Michał Nowak",
+    city: "Warszawa",
+    text: "Znaleźliśmy lot do Paryża w super cenie. Na pewno wrócę przy kolejnej podróży.",
     avatar: "/avatar-3.png",
   },
   {
@@ -29,7 +29,7 @@ export default function TestimonialsCarousel() {
   const items = [...testimonials, ...testimonials];
 
   return (
-    <section className="relative z-10 mx-auto mt-14 max-w-[1780px] overflow-hidden px-4 sm:px-6 lg:px-10">
+    <section className="relative z-10 mx-auto mt-14 max-w-[1780px] overflow-hidden px-4 ">
       <div className="mb-7">
         <h2 className="text-[26px] font-black tracking-tight sm:text-[32px]">
           Opinie klientów
@@ -40,8 +40,8 @@ export default function TestimonialsCarousel() {
       </div>
 
       <div className="relative overflow-hidden">
-        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-24 bg-gradient-to-r from-[#020812] to-transparent" />
-        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-24 bg-gradient-to-l from-[#020812] to-transparent" />
+        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-3 bg-gradient-to-r from-[#020812] to-transparent" />
+        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-3 bg-gradient-to-l from-[#020812] to-transparent" />
 
         <div className="flex w-max animate-testimonials gap-5">
           {items.map((item, index) => (

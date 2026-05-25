@@ -4,7 +4,7 @@ import { popularDestinations } from "../data/popularDestinations.js";
 
 export default function Popular() {
   return (
-    <section className="relative z-10 mx-auto max-w-[1780px] px-4 pb-16 pt-10 font-['Satoshi'] text-white sm:px-6 lg:px-10">
+    <section className="relative z-10 mx-auto max-w-[1780px] px-4 pb-16 pt-10 font-['Satoshi'] text-white">
       <div className="mb-8 flex items-end justify-between">
         <div>
           <h2 className="text-[28px] font-black tracking-tight sm:text-[34px]">

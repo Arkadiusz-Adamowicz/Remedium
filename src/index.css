@@ -20,5 +20,5 @@ body {
 }
 
 .animate-testimonials {
-  animation: testimonials-scroll 28s linear infinite reverse;
+  animation: testimonials-scroll 30s linear infinite reverse;
 }
