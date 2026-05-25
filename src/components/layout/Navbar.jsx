@@ -23,27 +23,28 @@ export default function Navbar() {
         </span>
       </Link>
 
-      <nav className="hidden items-center gap-[50px] text-[13px] font-semibold text-white/90 xl:flex">
+      <nav className="hidden items-center gap-[50px] text-[15px] font-semibold text-white/90 xl:flex">
         <Link to="/">Strona główna</Link>
         <Link to="/flights">Loty</Link>
-        <Link to="/reservations">Moje rezerwacje</Link>
+        <Link to="">Moje rezerwacje</Link>
         <Link to="/contact">Kontakt</Link>
       </nav>
 
       <div className="hidden items-center gap-3 md:flex">
         <Link
           to="/login"
-          className="rounded-[8px] border border-white/45 bg-white/10 px-[22px] py-[13px] text-[13px] font-bold shadow-inner shadow-white/10 backdrop-blur hover:bg-white/20"
+          // className="flex h-12 items-center justify-center rounded-xl bg-blue-600 text-[14px] font-black shadow-lg shadow-blue-700/40 hover:bg-blue-500"
+          className="flex h-12 items-center justify-center rounded-xl bg-blue-600 px-5 text-[14px] font-black shadow-lg shadow-blue-700/40 hover:bg-blue-500"
         >
-          Zaloguj się
+          Logowanie
         </Link>
 
-        <Link
+        {/* <Link
           to="/register"
           className="rounded-[8px] bg-blue-600 px-[24px] py-[14px] text-[13px] font-bold shadow-lg shadow-blue-700/40 hover:bg-blue-500"
         >
           Zarejestruj się
-        </Link>
+        </Link> */}
       </div>
 
       <button
@@ -69,10 +70,7 @@ export default function Navbar() {
             <MobileMenuLink to="/flights" setMobileMenuOpen={setMobileMenuOpen}>
               Loty
             </MobileMenuLink>
-            <MobileMenuLink
-              to="/reservations"
-              setMobileMenuOpen={setMobileMenuOpen}
-            >
+            <MobileMenuLink to="" setMobileMenuOpen={setMobileMenuOpen}>
               Moje rezerwacje
             </MobileMenuLink>
             <MobileMenuLink to="/contact" setMobileMenuOpen={setMobileMenuOpen}>
@@ -84,18 +82,18 @@ export default function Navbar() {
             <Link
               to="/login"
               onClick={() => setMobileMenuOpen(false)}
-              className="flex h-12 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-[14px] font-black hover:bg-white/15"
+              className="flex h-12 items-center justify-center rounded-xl bg-blue-600 text-[14px] font-black shadow-lg shadow-blue-700/40 hover:bg-blue-500" // className="flex h-12 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-[14px] font-black hover:bg-white/15"
             >
-              Zaloguj się
+              Logowanie
             </Link>
 
-            <Link
+            {/* <Link
               to="/register"
               onClick={() => setMobileMenuOpen(false)}
               className="flex h-12 items-center justify-center rounded-xl bg-blue-600 text-[14px] font-black shadow-lg shadow-blue-700/40 hover:bg-blue-500"
             >
               Zarejestruj się
-            </Link>
+            </Link> */}
           </div>
         </div>
       )}
